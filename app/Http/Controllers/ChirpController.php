@@ -17,7 +17,7 @@ class ChirpController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(): Response //การแสดงรายการ chirp
     {
         return Inertia::render('Chirps/Index', [
             'chirps' => Chirp::with('user:id,name')->latest()->get(),
@@ -35,7 +35,7 @@ class ChirpController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse  //การบันทึกข้อความ chirp
     {
         $validated = $request->validate([
             'message' => 'required|string|max:255',
@@ -65,7 +65,7 @@ class ChirpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Chirp $chirp): RedirectResponse
+    public function update(Request $request, Chirp $chirp): RedirectResponse  //การอัพเดตแก้ไขข้อความ chirp
     {
         Gate::authorize('update', $chirp); //เพิ่ม gate
 
@@ -81,7 +81,7 @@ class ChirpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chirp $chirp): RedirectResponse  //การลบ
+    public function destroy(Chirp $chirp): RedirectResponse  //การลบข้อความ chirp
     {
         Gate::authorize('delete', $chirp);
 
